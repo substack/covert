@@ -1,0 +1,35 @@
+{
+  "name": "covert",
+  "version": "0.0.0",
+  "description": "code coverage command con coverify",
+  "bin": {
+    "covert": "bin/cmd.js"
+  },
+  "dependencies": {
+    "browserify": "~3.12.0",
+    "coverify": "~0.3.1"
+  },
+  "devDependencies": {
+    "tape": "~1.0.4"
+  },
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/substack/covert.git"
+  },
+  "homepage": "https://github.com/substack/covert",
+  "keywords": [
+    "code",
+    "coverage",
+    "coverify",
+    "instrumentation"
+  ],
+  "author": {
+    "name": "James Halliday",
+    "email": "mail@substack.net",
+    "url": "http://substack.net"
+  },
+  "license": "MIT"
+}
