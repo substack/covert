@@ -35,7 +35,7 @@ var coverifyPath = require.resolve('coverify');
 try { coverifyPath = resolve.sync('coverify', { basedir: process.cwd() }) }
 catch (e) {}
 
-args.unshift('-t', coverifyPath, '--bare', '--no-detect-globals');
+args.unshift('--no-detect-globals', '-t', coverifyPath, '--bare');
 
 var browserify = spawn('browserify', args);
 browserify.stderr.pipe(process.stderr);
