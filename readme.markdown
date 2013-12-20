@@ -7,6 +7,37 @@ code coverage command
 ```
 ```
 
+# install
+
+With [npm](https://npmjs.org) do:
+
+```
+npm install -g covert
+```
+
+# usage
+
+```
+usage: covert {OPTIONS} FILES
+
+  Instrument FILES and in-module dependencies, writing coverage data to STDERR.
+
+  OPTIONS are:
+
+    --json
+
+      Suppress normal output and print json coverage data to stdout.
+
+    -q, --quiet  
+
+      Only print coverage data, suppressing all other output.
+
+    -c, --color
+
+      Use color in the output. Default: true if stdout is a TTY.
+
+```
+
 # why
 
 Most code coverage libraries do weird thing I don't like, such as writing all
@@ -30,7 +61,6 @@ browserify -t coverify --bare $* | node | coverify
 * works really well with simple unix pipelines.
 stdin and stdout: the wisdom of the ancients.
 
-# usage
+# license
 
-```
-```
+MIT

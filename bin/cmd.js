@@ -20,8 +20,8 @@ var minimist = require('minimist');
 var spawn = require('child_process').spawn;
 
 var argv = minimist(process.argv.slice(2), {
-    boolean: [ 'color', 'h' ],
-    alias: { c: 'color', color: 'colors', h: 'help' }
+    boolean: [ 'c', 'h', 'q', 'json' ],
+    alias: { c: 'color', color: 'colors', h: 'help', q: 'quiet' }
 });
 var vargv = minimist(process.argv.slice(2));
 
@@ -46,17 +46,26 @@ node.stderr.pipe(process.stderr);
 node.on('exit', onexit('node'));
 
 var cargs = [];
+if (argv.json) cargs.push('--json');
+if (argv.quiet) cargs.push('--quiet');
 if (vargv.color === undefined && process.stdout.isTTY) {
-    cargs = [ '--color' ];
+    cargs.push('--color');
 }
 
 var coverify = spawn('coverify', cargs);
-coverify.stderr.pipe(process.stderr);
 coverify.on('exit', onexit('coverify'));
 
 browserify.stdout.pipe(node.stdin);
 node.stdout.pipe(coverify.stdin);
-coverify.stdout.pipe(process.stdout);
+
+if (argv.json) {
+    coverify.stderr.pipe(process.stdout);
+    coverify.stdout.pipe(process.stderr);
+}
+else {
+    coverify.stderr.pipe(process.stderr);
+    coverify.stdout.pipe(process.stdout);
+}
 
 function onexit (name) {
     return function (code) {

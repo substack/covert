@@ -6,7 +6,7 @@ usage: covert {OPTIONS} FILES
 
     --json
 
-      Suppress normal output and print json coverage data to stdout.
+      Write coverage data as JSON to stdout.
 
     -q, --quiet  
 
