@@ -87,8 +87,8 @@ usage: covert {OPTIONS} FILES
 
 # why
 
-Most code coverage libraries do weird thing I don't like, such as writing all
-their junk to directories and files without telling me about it.
+Most code coverage libraries do weird things I don't like, such as writing all
+their junk to directories and files in a completely out-of-band way.
 
 covert:
 
