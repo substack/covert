@@ -1,5 +1,21 @@
 #!/usr/bin/env node
 
+var parents = require('parents');
+var fs = require('fs');
+var path = require('path');
+var resolve = require('resolve');
+
+var paths = parents(process.cwd());
+var parts = process.env.PATH.split(':');
+var prefix = [];
+var postfix = [ __dirname + '/node_modules/.bin' ];
+
+for (var i = 0; i < paths.length; i++) {
+    var x = path.join(paths[i], 'node_modules/.bin');
+    if (fs.existsSync(x)) prefix.push(x);
+}
+process.env.PATH = prefix.concat(parts).concat(postfix).join(':');
+
 var minimist = require('minimist');
 var spawn = require('child_process').spawn;
 
@@ -10,7 +26,11 @@ var argv = minimist(process.argv.slice(2), {
 var vargv = minimist(process.argv.slice(2));
 
 var args = argv._.slice();
-args.unshift('-t', 'coverify', '--bare', '--no-detect-globals');
+var coverifyPath = require.resolve('coverify');
+try { coverifyPath = resolve.sync('coverify', { basedir: process.cwd() }) }
+catch (e) {}
+
+args.unshift('-t', coverifyPath, '--bare', '--no-detect-globals');
 
 var browserify = spawn('browserify', args);
 browserify.stderr.pipe(process.stderr);
