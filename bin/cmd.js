@@ -20,12 +20,17 @@ var minimist = require('minimist');
 var spawn = require('child_process').spawn;
 
 var argv = minimist(process.argv.slice(2), {
-    boolean: [ 'color' ],
-    alias: { c: 'color', color: 'colors' }
+    boolean: [ 'color', 'h' ],
+    alias: { c: 'color', color: 'colors', h: 'help' }
 });
 var vargv = minimist(process.argv.slice(2));
 
 var args = argv._.slice();
+if (args.length === 0 || argv.h || argv.help) {
+    fs.createReadStream(__dirname + '/usage.txt').pipe(process.stdout);
+    return;
+}
+
 var coverifyPath = require.resolve('coverify');
 try { coverifyPath = resolve.sync('coverify', { basedir: process.cwd() }) }
 catch (e) {}
