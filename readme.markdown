@@ -4,8 +4,55 @@ code coverage command
 
 # example
 
+Just run `covert` on some ordinary files:
+
 ```
+$ covert test/*.js
+TAP version 13
+# defined-or
+ok 1 empty arguments
+ok 2 1 undefined
+ok 3 2 undefined
+ok 4 4 undefineds
+ok 5 false[0]
+ok 6 false[1]
+ok 7 zero[0]
+ok 8 zero[1]
+ok 9 first arg
+ok 10 second arg
+ok 11 third arg
+# (anonymous)
+ok 12 should be equal
+
+1..12
+# tests 12
+# pass  12
+
+# ok
+
+# /home/substack/projects/defined/index.js: line 3, column 18-26
+
+  if (false) dead();
+             ^^^^^^^
+
+# /home/substack/projects/defined/index.js: line 6, column 16-18, 19-25, 26-30, 31-51
+
+  for (var i = 0; i < 5; i++) console.log('blah');
+               ^  ^^^^^  ^^^  ^^^^^^^^^^^^^^^^^^^
+
+# /home/substack/projects/defined/index.js: line 10, column 3-24
+
+  console.log('blah');
+  ^^^^^^^^^^^^^^^^^^^^
+
+# coverage: 76/82 (92.68 %)
+
+non-zero exit code in `coverify` command
 ```
+
+In this example, this test suite is using
+[tape](https://npmjs.org/package/tape). Tests written with tape can just be run
+directly using `node`, which fits very well with what this command expects.
 
 # install
 
