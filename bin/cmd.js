@@ -52,7 +52,6 @@ coverify.on('exit', onexit('coverify'));
 browserify.stdout.pipe(node.stdin);
 node.stdout.pipe(coverify.stdin);
 coverify.stdout.pipe(process.stdout);
-coverify.stderr.pipe(process.stderr);
 
 function onexit (name) {
     return function (code) {
