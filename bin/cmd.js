@@ -8,7 +8,7 @@ var resolve = require('resolve');
 var paths = parents(process.cwd());
 var parts = process.env.PATH.split(':');
 var prefix = [];
-var postfix = [ __dirname + '/node_modules/.bin' ];
+var postfix = [ __dirname + '/../node_modules/.bin' ];
 
 for (var i = 0; i < paths.length; i++) {
     var x = path.join(paths[i], 'node_modules/.bin');
