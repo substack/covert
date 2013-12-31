@@ -1,13 +1,13 @@
 {
   "name": "covert",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "code coverage command con coverify",
   "bin": {
     "covert": "bin/cmd.js"
   },
   "dependencies": {
     "browserify": ">=3.13.0 && <4",
-    "coverify": "~0.4.0",
+    "coverify": "~1.0.0",
     "parents": "~0.0.2",
     "resolve": "~0.6.1",
     "minimist": "~0.0.5"
