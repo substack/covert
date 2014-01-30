@@ -9,10 +9,11 @@ var paths = parents(process.cwd());
 var parts = process.env.PATH.split(':');
 var prefix = [];
 var postfix = [ __dirname + '/../node_modules/.bin' ];
+var existsSync = fs.existsSync || path.existsSync;
 
 for (var i = 0; i < paths.length; i++) {
     var x = path.join(paths[i], 'node_modules/.bin');
-    if (fs.existsSync(x)) prefix.push(x);
+    if (existsSync(x)) prefix.push(x);
 }
 process.env.PATH = prefix.concat(parts).concat(postfix).join(':');
 

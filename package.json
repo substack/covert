@@ -28,5 +28,8 @@
     "email": "mail@substack.net",
     "url": "http://substack.net"
   },
+  "engines": {
+    "node": ">= 0.6"
+  },
   "license": "MIT"
 }
