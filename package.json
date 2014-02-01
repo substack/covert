@@ -1,6 +1,6 @@
 {
   "name": "covert",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "code coverage command con coverify",
   "bin": {
     "covert": "bin/cmd.js"
