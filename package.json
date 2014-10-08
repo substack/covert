@@ -6,7 +6,7 @@
     "covert": "bin/cmd.js"
   },
   "dependencies": {
-    "browserify": "^5.9.1",
+    "browserify": "^6.0.3",
     "coverify": "^1.0.7",
     "parents": "^1.0.0",
     "resolve": "~0.7.4",
