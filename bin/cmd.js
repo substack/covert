@@ -6,16 +6,16 @@ var path = require('path');
 var resolve = require('resolve');
 
 var paths = parents(process.cwd());
-var parts = process.env.PATH.split(':');
+var parts = process.env.PATH.split(path.delimiter);
 var prefix = [];
-var postfix = [ __dirname + '/../node_modules/.bin' ];
+var postfix = [ path.join(__dirname, '../node_modules/.bin') ];
 var existsSync = fs.existsSync || path.existsSync;
 
 for (var i = 0; i < paths.length; i++) {
     var x = path.join(paths[i], 'node_modules/.bin');
     if (existsSync(x)) prefix.push(x);
 }
-process.env.PATH = prefix.concat(parts).concat(postfix).join(':');
+process.env.PATH = prefix.concat(parts).concat(postfix).join(path.delimiter);
 
 var minimist = require('minimist');
 var spawn = require('child_process').spawn;
@@ -28,7 +28,7 @@ var vargv = minimist(process.argv.slice(2));
 
 var args = argv._.slice();
 if (args.length === 0 || argv.h || argv.help) {
-    fs.createReadStream(__dirname + '/usage.txt').pipe(process.stdout);
+    fs.createReadStream(path.join(__dirname, 'usage.txt')).pipe(process.stdout);
     return;
 }
 
@@ -38,7 +38,8 @@ catch (e) {}
 
 args.unshift('-t', coverifyPath, '--bare', '--no-bundle-external');
 
-var browserify = spawn('browserify', args);
+var browserifyExecutable = process.platform === 'win32' ? 'browserify.cmd' : 'browserify';
+var browserify = spawn(browserifyExecutable, args);
 browserify.stderr.pipe(process.stderr);
 browserify.on('exit', onexit('browserify'));
 
@@ -53,7 +54,8 @@ if (vargv.color === undefined && process.stdout.isTTY) {
     cargs.push('--color');
 }
 
-var coverify = spawn('coverify', cargs);
+var coverifyExecutable = process.platform === 'win32' ? 'coverify.cmd' : 'coverify';
+var coverify = spawn(coverifyExecutable, cargs);
 coverify.on('exit', onexit('coverify'));
 
 browserify.stdout.pipe(node.stdin);
