@@ -36,7 +36,7 @@ var coverifyPath = require.resolve('coverify');
 try { coverifyPath = resolve.sync('coverify', { basedir: process.cwd() }) }
 catch (e) {}
 
-args.unshift('-t', coverifyPath, '--bare', '--no-bundle-external');
+args.unshift('-t', coverifyPath, '--bare', '--node', '--no-bundle-external');
 
 var browserifyExecutable = process.platform === 'win32' ? 'browserify.cmd' : 'browserify';
 var browserify = spawn(browserifyExecutable, args);
