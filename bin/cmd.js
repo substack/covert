@@ -21,10 +21,10 @@ var minimist = require('minimist');
 var spawn = require('child_process').spawn;
 
 var argv = minimist(process.argv.slice(2), {
-    boolean: [ 'c', 'h', 'q', 'json' ],
-    alias: { c: 'color', color: 'colors', h: 'help', q: 'quiet' }
+    boolean: [ 'c', 'color', 'colors', 'h', 'q', 'json' ],
+    alias: { c: ['color', 'colors'], h: 'help', q: 'quiet' },
+    default: { c: process.stdout.isTTY, color: process.stdout.isTTY, colors: process.stdout.isTTY }
 });
-var vargv = minimist(process.argv.slice(2));
 
 var args = argv._.slice();
 if (args.length === 0 || argv.h || argv.help) {
@@ -50,9 +50,7 @@ node.on('exit', onexit('node'));
 var cargs = [];
 if (argv.json) cargs.push('--json');
 if (argv.quiet) cargs.push('--quiet');
-if (vargv.color === undefined && process.stdout.isTTY) {
-    cargs.push('--color');
-}
+if (argv.color) cargs.push('--color');
 
 var coverifyExecutable = process.platform === 'win32' ? 'coverify.cmd' : 'coverify';
 var coverify = spawn(coverifyExecutable, cargs);

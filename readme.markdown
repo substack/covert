@@ -79,7 +79,7 @@ usage: covert {OPTIONS} FILES
 
       Only print coverage data, suppressing all other output.
 
-    -c, --color
+    -c, --color, --colors
 
       Use color in the output. Default: true if stdout is a TTY.
 
