@@ -6,11 +6,11 @@
     "covert": "bin/cmd.js"
   },
   "dependencies": {
-    "browserify": "^10.0.0",
-    "coverify": "^1.3.2",
-    "parents": "^1.0.0",
-    "resolve": "~0.7.4",
-    "minimist": "^1.0.0"
+    "browserify": "^16.2.3",
+    "coverify": "^1.5.1",
+    "minimist": "^1.2.0",
+    "parents": "^1.0.1",
+    "resolve": "^1.9.0"
   },
   "repository": {
     "type": "git",
